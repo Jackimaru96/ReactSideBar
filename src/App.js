@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Paper, Typography } from "@material-ui/core";
 import "./App.css";
 import Backdrop from "./components/Backdrop";
 import SideDrawer from "./components/SideDrawer";
@@ -25,6 +25,16 @@ function App() {
             <Grid container>
               <Grid item xs={3}>
                 <LeftPane>
+                  <Typography variant="h6" style={{ padding: "5px 10px" }}>
+                    POI Scope
+                  </Typography>
+                  <Typography
+                    variant="subtitle2"
+                    style={{ padding: "5px 10px" }}
+                  >
+                    Filter which POIs are to be included in the search scope for
+                    past quotes
+                  </Typography>
                   <SideDrawerCheckboxes />
                 </LeftPane>
               </Grid>

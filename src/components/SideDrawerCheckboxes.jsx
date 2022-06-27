@@ -9,6 +9,7 @@ import {
   createStyles,
   Checkbox,
   ListItemSecondaryAction,
+  Typography,
   ListItemIcon,
   InputBase,
   Chip,
@@ -30,15 +31,20 @@ const useStyles = makeStyles((theme) => ({
     display: "inline",
   },
   searchbar: {
-    width: "auto",
-    display: "block",
-    border: "3px solid #00b4cc",
-    borderRight: "none",
-    padding: "5px",
-    height: "50px",
-    borderRadius: "5px 0 0 5px",
-    outline: "none",
-    color: "#9dbfaf",
+    width: "95%",
+    height: "30px",
+    border: "3px solid gray",
+    borderRadius: "5px",
+    backgroundColor: "#d2d1d1",
+    color: "black",
+    margin: "5px 20px 5px 5px",
+    fontSize: "19px",
+    padding: "30px 30px",
+    cursor: "auto",
+    "&.Mui-focused": {
+      borderColor: "#00688a",
+      backgroundColor: "#eaf9fb",
+    },
   },
 }));
 
@@ -133,11 +139,14 @@ const SideDrawerCheckboxes = () => {
   return (
     <>
       <InputBase
-        placeholder="Search…"
+        placeholder="Search by POI name..."
         inputProps={{ "aria-label": "search" }}
         onChange={filter}
         className={classes.searchbar}
       />
+      {checked.length > 0 && (
+        <Typography align="right">{checked.length} POIs selected</Typography>
+      )}
       {chips.map((name) => (
         <Chip
           label={name}
