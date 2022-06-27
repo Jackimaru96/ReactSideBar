@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) =>
       boxShadow: "1px 0px 7px rgba(0,0,0,0.5)",
       transition: "transform 0.3s ease-out",
       overflowY: "scroll",
+      overflowX: "hidden",
     },
   })
 );

@@ -1,13 +1,12 @@
 import React, { useState, useContext } from "react";
 import {
   List,
-  ListItem,
   ListItemText,
   ListItemAvatar,
   Avatar,
   makeStyles,
+  withStyles,
   createStyles,
-  Checkbox,
   ListItemSecondaryAction,
   Typography,
   ListItemIcon,
@@ -15,12 +14,33 @@ import {
   Chip,
 } from "@material-ui/core";
 
+import MuiListItem from "@material-ui/core/ListItem";
+import MuiCheckBox from "@material-ui/core/Checkbox";
+
 import FilterChips from "./FilterChips";
 
 import photo from "./images/DisplayPic.jpg";
 
 import { ChipContext, DrawerContext, PoiContext } from "../App";
 import { useEffect } from "react";
+
+const ListItem = withStyles({
+  root: {
+    "&$selected": {
+      backgroundColor: "#eaf9fb",
+    },
+  },
+  selected: {},
+})(MuiListItem);
+
+const Checkbox = withStyles({
+  root: {
+    "&$checked": {
+      color: "green",
+    },
+  },
+  checked: {},
+})(MuiCheckBox);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,17 +52,28 @@ const useStyles = makeStyles((theme) => ({
   },
   searchbar: {
     width: "95%",
-    height: "30px",
+    height: "20px",
     border: "3px solid gray",
-    borderRadius: "5px",
+    borderRadius: "30px",
     backgroundColor: "#d2d1d1",
     color: "black",
     margin: "5px 20px 5px 5px",
     fontSize: "19px",
-    padding: "30px 30px",
+    padding: "20px 20px",
     cursor: "auto",
     "&.Mui-focused": {
       borderColor: "#00688a",
+      backgroundColor: "#eaf9fb",
+    },
+  },
+  listItem: {
+    border: "1px solid #f3f2f2",
+    boxShadow: "1px 5px #f3f2f2",
+    borderRadius: "10px",
+    margin: "2px 10px",
+    width: "95%",
+    backgroundColor: "#ffffff",
+    "&:hover": {
       backgroundColor: "#eaf9fb",
     },
   },
@@ -161,8 +192,15 @@ const SideDrawerCheckboxes = () => {
         {filteredArray.map((value) => {
           const labelId = `checkbox-list-label-${value}`;
           return (
-            <ListItem key={value} dense button onClick={handleToggle(value)}>
-              <ListItemIcon>
+            <ListItem
+              className={`${classes.listItem} $`}
+              key={value}
+              selected={checked.includes(value)}
+              dense
+              button
+              onClick={handleToggle(value)}
+            >
+              <ListItemSecondaryAction>
                 <Checkbox
                   edge="start"
                   checked={checked.indexOf(value) !== -1}
@@ -170,11 +208,15 @@ const SideDrawerCheckboxes = () => {
                   disableRipple
                   inputProps={{ "aria-labelledby": labelId }}
                 />
-              </ListItemIcon>
+              </ListItemSecondaryAction>
               <ListItemAvatar>
                 <Avatar alt="test" src={photo} />
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={`${value}`} />
+              <ListItemText
+                id={labelId}
+                primary={`${value}`}
+                secondary={`ABC Politician`}
+              />
             </ListItem>
           );
         })}
